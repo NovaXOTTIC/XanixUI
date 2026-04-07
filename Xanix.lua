@@ -31,30 +31,30 @@ local IS_MOBILE = UIS.TouchEnabled and not UIS.KeyboardEnabled
 
 -- ─── COLOURS ─────────────────────────────────────────────────────────────────
 local C = {
-    Bg           = Color3.fromRGB(8,   8,   12),
-    BgTab        = Color3.fromRGB(10,  10,  14),
-    BgSearch     = Color3.fromRGB(10,  10,  14),
-    BgTitleBar   = Color3.fromRGB(14,  14,  20),
-    BgRow        = Color3.fromRGB(14,  14,  18),
-    BgRowHover   = Color3.fromRGB(20,  20,  26),
-    BgTabBtn     = Color3.fromRGB(12,  12,  17),
-    BgTabAct     = Color3.fromRGB(16,  16,  22),
-    BgInput      = Color3.fromRGB(10,  10,  14),
-    BgDd         = Color3.fromRGB(12,  12,  18),
-    BorderPanel  = Color3.fromRGB(50,  65,  120),
-    BorderTab    = Color3.fromRGB(55,  70,  130),
-    BorderSearch = Color3.fromRGB(80,  80,  90),
-    BorderTabBtn = Color3.fromRGB(55,  75,  140),
-    BorderRow    = Color3.fromRGB(35,  35,  45),
-    BorderInput  = Color3.fromRGB(40,  40,  55),
-    Underline    = Color3.fromRGB(60,  90,  200),
+    Bg           = Color3.fromRGB(6, 6, 8),
+    BgTab        = Color3.fromRGB(10, 10, 12),
+    BgSearch     = Color3.fromRGB(10, 10, 12),
+    BgTitleBar   = Color3.fromRGB(14, 14, 16),
+    BgRow        = Color3.fromRGB(12, 12, 14),
+    BgRowHover   = Color3.fromRGB(20, 20, 22),
+    BgTabBtn     = Color3.fromRGB(10, 10, 12),
+    BgTabAct     = Color3.fromRGB(18, 18, 20),
+    BgInput      = Color3.fromRGB(10, 10, 12),
+    BgDd         = Color3.fromRGB(10, 10, 12),
+    BorderPanel  = Color3.fromRGB(60, 60, 65),
+    BorderTab    = Color3.fromRGB(65, 65, 70),
+    BorderSearch = Color3.fromRGB(70, 70, 75),
+    BorderTabBtn = Color3.fromRGB(60, 60, 68),
+    BorderRow    = Color3.fromRGB(38, 38, 40),
+    BorderInput  = Color3.fromRGB(45, 45, 48),
+    Underline    = Color3.fromRGB(200, 200, 210),
     Text         = Color3.fromRGB(255, 255, 255),
-    TextDim      = Color3.fromRGB(160, 165, 185),
-    TextMuted    = Color3.fromRGB(100, 105, 125),
-    TrackOff     = Color3.fromRGB(35,  35,  45),
-    TrackOn      = Color3.fromRGB(80,  110, 220),
-    Fill         = Color3.fromRGB(80,  110, 220),
-    NotifBg      = Color3.fromRGB(10,  10,  16),
+    TextDim      = Color3.fromRGB(155, 155, 160),
+    TextMuted    = Color3.fromRGB(100, 100, 105),
+    TrackOff     = Color3.fromRGB(38, 38, 40),
+    TrackOn      = Color3.fromRGB(220, 220, 225),
+    Fill         = Color3.fromRGB(220, 220, 225),
+    NotifBg      = Color3.fromRGB(8, 8, 10),
 }
 
 -- ─── SIZES ───────────────────────────────────────────────────────────────────
@@ -62,7 +62,7 @@ local S
 if IS_MOBILE then
     S = { TAB_W=170, CONTENT_W=330, FULL_H=420, SEARCH_H=32, TITLE_H=42, GAP=12 }
 else
-    S = { TAB_W=245, CONTENT_W=950, FULL_H=630, SEARCH_H=38, TITLE_H=52, GAP=20 }
+    S = { TAB_W=190, CONTENT_W=560, FULL_H=460, SEARCH_H=34, TITLE_H=44, GAP=14 }
 end
 
 local TW  = TweenInfo.new(0.14, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
@@ -288,7 +288,7 @@ function Xanix:CreateWindow(cfg)
         Size                    = UDim2.new(1, 0, 1, 0),
         BackgroundTransparency  = 1,
         ScrollBarThickness      = IS_MOBILE and 2 or 3,
-        ScrollBarImageColor3    = Color3.fromRGB(60, 60, 80),
+        ScrollBarImageColor3    = Color3.fromRGB(60, 60, 62),
         CanvasSize              = UDim2.new(0, 0, 0, 0),
         AutomaticCanvasSize     = Enum.AutomaticSize.Y,
         ScrollingDirection      = Enum.ScrollingDirection.Y,
@@ -540,7 +540,7 @@ function Xanix:CreateWindow(cfg)
             Size                    = UDim2.new(1, 0, 1, 0),
             BackgroundTransparency  = 1,
             ScrollBarThickness      = IS_MOBILE and 2 or 3,
-            ScrollBarImageColor3    = Color3.fromRGB(50, 60, 90),
+            ScrollBarImageColor3    = Color3.fromRGB(55, 55, 58),
             CanvasSize              = UDim2.new(0, 0, 0, 0),
             AutomaticCanvasSize     = Enum.AutomaticSize.Y,
             BorderSizePixel         = 0,
@@ -556,7 +556,7 @@ function Xanix:CreateWindow(cfg)
 
         btn.MouseEnter:Connect(function()
             if activeTab ~= t then
-                tween(btn, { BackgroundColor3 = Color3.fromRGB(18, 18, 26), TextColor3 = C.Text })
+                tween(btn, { BackgroundColor3 = Color3.fromRGB(18, 18, 20), TextColor3 = C.Text })
             end
         end)
         btn.MouseLeave:Connect(function()
@@ -677,7 +677,7 @@ function Xanix:CreateWindow(cfg)
                 Text = "", AutoButtonColor = false, Parent = f,
             })
             cl.MouseButton1Click:Connect(function()
-                tween(f, { BackgroundColor3 = Color3.fromRGB(22, 25, 35) })
+                tween(f, { BackgroundColor3 = Color3.fromRGB(22, 22, 24) })
                 tween(arr, { TextColor3 = C.Text })
                 task.delay(0.2, function()
                     tween(f, { BackgroundColor3 = C.BgRow })
@@ -707,7 +707,7 @@ function Xanix:CreateWindow(cfg)
             local track = mk("Frame", {
                 Size = UDim2.fromOffset(TRK_W, TRK_H),
                 Position = UDim2.new(1, -(TRK_W + 10), 0.5, -TRK_H / 2),
-                BackgroundColor3 = state and C.TrackOn or C.TrackOff,
+                BackgroundColor3 = state and Color3.fromRGB(220,220,225) or Color3.fromRGB(38,38,40),
                 BorderSizePixel = 0, Parent = f,
             })
             corner(track, 11)
@@ -725,8 +725,8 @@ function Xanix:CreateWindow(cfg)
             local function setToggle(v)
                 state          = v
                 s.CurrentValue = v
-                tween(track, { BackgroundColor3 = v and C.TrackOn or C.TrackOff })
-                tween(thumb, { Position = v and UDim2.fromOffset(21, 3) or UDim2.fromOffset(3, 3) })
+                tween(track, { BackgroundColor3 = v and Color3.fromRGB(220,220,225) or Color3.fromRGB(38,38,40) })
+                tween(thumb, { Position = v and UDim2.fromOffset(21, 3) or UDim2.fromOffset(3, 3), BackgroundColor3 = v and Color3.fromRGB(20,20,22) or Color3.fromRGB(160,160,165) })
                 if s.Callback then task.spawn(pcall, s.Callback, v) end
             end
 
@@ -779,7 +779,7 @@ function Xanix:CreateWindow(cfg)
             local tBg = mk("Frame", {
                 Size = UDim2.new(1, -28, 0, 4),
                 Position = UDim2.new(0, 14, 1, IS_MOBILE and -14 or -16),
-                BackgroundColor3 = Color3.fromRGB(35, 38, 55), BackgroundTransparency = 0,
+                BackgroundColor3 = Color3.fromRGB(38, 38, 42), BackgroundTransparency = 0,
                 BorderSizePixel = 0, Parent = f,
             })
             corner(tBg, 2)
@@ -962,7 +962,7 @@ function Xanix:CreateWindow(cfg)
             local ddSF = mk("ScrollingFrame", {
                 Size = UDim2.new(1, 0, 1, 0), BackgroundTransparency = 1,
                 BorderSizePixel = 0, ScrollBarThickness = 2,
-                ScrollBarImageColor3 = Color3.fromRGB(60, 70, 100),
+                ScrollBarImageColor3 = Color3.fromRGB(60, 60, 62),
                 CanvasSize = UDim2.new(0, 0, 0, 0),
                 AutomaticCanvasSize = Enum.AutomaticSize.Y,
                 ZIndex = 61, Parent = ddF,
@@ -981,7 +981,7 @@ function Xanix:CreateWindow(cfg)
             for _, opt in ipairs(opts) do
                 local ob = mk("TextButton", {
                     Size = UDim2.new(1, 0, 0, optH),
-                    BackgroundColor3 = Color3.fromRGB(16, 16, 22), BackgroundTransparency = 0,
+                    BackgroundColor3 = Color3.fromRGB(14, 14, 16), BackgroundTransparency = 0,
                     BorderSizePixel = 0, Text = opt, TextSize = FS - 1,
                     Font = Enum.Font.Gotham, TextColor3 = C.Text,
                     AutoButtonColor = false, ZIndex = 62, Parent = ddSF,
@@ -989,15 +989,15 @@ function Xanix:CreateWindow(cfg)
                 corner(ob, 5)
 
                 if table.find(s.CurrentOption, opt) then
-                    ob.BackgroundColor3 = Color3.fromRGB(22, 25, 40)
+                    ob.BackgroundColor3 = Color3.fromRGB(22, 22, 24)
                 end
 
                 ob.MouseEnter:Connect(function()
-                    tween(ob, { BackgroundColor3 = Color3.fromRGB(22, 25, 40) })
+                    tween(ob, { BackgroundColor3 = Color3.fromRGB(22, 22, 24) })
                 end)
                 ob.MouseLeave:Connect(function()
                     local selected = table.find(s.CurrentOption, opt)
-                    tween(ob, { BackgroundColor3 = selected and Color3.fromRGB(22, 25, 40) or Color3.fromRGB(16, 16, 22) })
+                    tween(ob, { BackgroundColor3 = selected and Color3.fromRGB(22, 22, 24) or Color3.fromRGB(14, 14, 16) })
                 end)
                 ob.MouseButton1Click:Connect(function()
                     if not multi then
@@ -1009,10 +1009,10 @@ function Xanix:CreateWindow(cfg)
                         local idx = table.find(s.CurrentOption, opt)
                         if idx then
                             table.remove(s.CurrentOption, idx)
-                            tween(ob, { BackgroundColor3 = Color3.fromRGB(16, 16, 22) })
+                            tween(ob, { BackgroundColor3 = Color3.fromRGB(14, 14, 16) })
                         else
                             table.insert(s.CurrentOption, opt)
-                            tween(ob, { BackgroundColor3 = Color3.fromRGB(22, 25, 40) })
+                            tween(ob, { BackgroundColor3 = Color3.fromRGB(22, 22, 24) })
                         end
                         selBtn.Text = selText()
                     end
