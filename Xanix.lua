@@ -249,8 +249,8 @@ function Xanix:CreateWindow(cfg)
     local TabList = mk("ScrollingFrame", {
         Name="TabList", Parent=Anchor,
         BackgroundColor3=C.BgPanel, BorderSizePixel=0,
-        Position=UDim2.new(0,0, 0.075000003,0),
-        Size=UDim2.new(0.219999999,0, 0.925000012,0),
+        Position=UDim2.new(0,0, 0.078,0),
+        Size=UDim2.new(0.219999999,0, 0.922,0),
         CanvasSize=UDim2.new(0,0,0,0),
         AutomaticCanvasSize=Enum.AutomaticSize.Y,
         ScrollBarThickness=3,
@@ -263,11 +263,13 @@ function Xanix:CreateWindow(cfg)
     pad(TabList, 12,12,16,16)
 
     -- ── Search (direct child of ScreenGui, matches template) ──────────────────
+    -- Search INSIDE Anchor — moves with drag automatically
     local Search = mk("TextBox", {
-        Name="Search", Parent=sg,
+        Name="Search", Parent=Anchor,
         BackgroundColor3=C.SearchBg, BorderSizePixel=0,
-        Position=UDim2.new(0.33,0, 0.174,0),
-        Size=UDim2.new(0.087,0, 0.034,0),
+        -- sits at top of anchor, same width as TabList, above it
+        Position=UDim2.new(0,0, 0,0),
+        Size=UDim2.new(0.219999999,0, 0.065,0),
         Font=Enum.Font.GothamMedium, Text="",
         PlaceholderText="Search...",
         TextColor3=C.Text, PlaceholderColor3=C.TextMuted,
@@ -276,9 +278,9 @@ function Xanix:CreateWindow(cfg)
     })
     corner(Search, 1000)
     uiStroke(Search, Color3.fromRGB(255,255,255), 1, 0)
-    pad(Search, 10,10,0,0)
+    pad(Search, 10,28,0,0)
 
-    local searchIcon = mk("ImageLabel", {
+    mk("ImageLabel", {
         Size=UDim2.new(0,14,0,14),
         Position=UDim2.new(1,-20,0.5,-7),
         BackgroundTransparency=1,
@@ -291,8 +293,8 @@ function Xanix:CreateWindow(cfg)
     local MobileButton = mk("TextButton", {
         Name="MobileButton", Parent=sg,
         BackgroundColor3=C.Bg, BorderSizePixel=0,
-        Position=UDim2.new(0.494989991,0, 0.00882723834,0),
-        Size=UDim2.new(0.0877659544,0, 0.0441361926,0),
+        Position=UDim2.new(0.5,-70, 0.01,0),
+        Size=UDim2.new(0,140, 0,34),
         Font=Enum.Font.GothamMedium,
         Text="Open " .. winName,
         TextColor3=C.Text, TextSize=13,
@@ -348,12 +350,7 @@ function Xanix:CreateWindow(cfg)
                 startPos.X.Scale, startPos.X.Offset + d.X,
                 startPos.Y.Scale, startPos.Y.Offset + d.Y
             )
-            -- Keep Search bar in sync with Anchor
-            Search.Position = UDim2.new(
-                Anchor.Position.X.Scale, Anchor.Position.X.Offset,
-                Anchor.Position.Y.Scale, Anchor.Position.Y.Offset
-                    - Search.AbsoluteSize.Y - 6
-            )
+            -- Search is inside Anchor, moves automatically
         end
     end)
     UIS.InputEnded:Connect(function(i)
@@ -384,7 +381,6 @@ function Xanix:CreateWindow(cfg)
         if ok and i.KeyCode == kc then
             guiVis         = not guiVis
             Anchor.Visible = guiVis
-            Search.Visible = guiVis
         end
     end)
 
@@ -392,7 +388,6 @@ function Xanix:CreateWindow(cfg)
     MobileButton.MouseButton1Click:Connect(function()
         guiVis         = not guiVis
         Anchor.Visible = guiVis
-        Search.Visible = guiVis
         MobileButton.Text = guiVis and ("Hide " .. winName) or ("Open " .. winName)
     end)
 
@@ -461,8 +456,8 @@ function Xanix:CreateWindow(cfg)
         if #tabs == 1 then switchTab(t) end
 
         -- ── ROW ──────────────────────────────────────────────────────────────
-        local FS    = 13
-        local ROW_H = 34
+        local FS    = IS_MOBILE and 12 or 13
+        local ROW_H = IS_MOBILE and 30 or 34
 
         local function makeRow(h)
             local f = mk("Frame", {
@@ -1070,6 +1065,9 @@ function Xanix:CreateWindow(cfg)
 
     task.delay(0.6, function()
         Xanix:Notify({Title="Xanix", Content="Loaded "..winName, Duration=3})
+    end)
+    task.delay(2, function()
+        Xanix:Notify({Title="Tip", Content="Press K to open and close the UI", Duration=4})
     end)
 
     return Window
