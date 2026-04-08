@@ -164,8 +164,8 @@ function Xanix:CreateWindow(cfg)
         Name="Anchor", Parent=sg,
         BackgroundColor3=C.Bg, BackgroundTransparency=1,
         BorderSizePixel=0,
-        Position=UDim2.new(0.259519041,0, 0.197351828,0),
-        Size=UDim2.new(0.480961919,0, 0.605296314,0),
+        Position=UDim2.new(0.33,0, 0.22,0),
+        Size=UDim2.new(0.34,0, 0.50,0),
     })
     corner(Anchor, 12)
 
@@ -178,7 +178,7 @@ function Xanix:CreateWindow(cfg)
         Size=UDim2.new(0.964598835,0, 1,0),
     })
     corner(ContentPanel, 12)
-    uiStroke(ContentPanel, C.PanelBorder, 1, 0)
+    uiStroke(ContentPanel, Color3.fromRGB(255,255,255), 1, 0)
 
     -- ── TitleBar ──────────────────────────────────────────────────────────────
     local TitleBar = mk("Frame", {
@@ -210,7 +210,7 @@ function Xanix:CreateWindow(cfg)
         Position=UDim2.new(0.0205580015,0, 0,0),
         Size=UDim2.new(0.882525682,0, 1,0),
         Font=Enum.Font.GothamBold, Text=winName,
-        TextColor3=C.Text, TextSize=18,
+        TextColor3=C.Text, TextSize=15,
         TextXAlignment=Enum.TextXAlignment.Left,
     })
 
@@ -258,7 +258,7 @@ function Xanix:CreateWindow(cfg)
         ScrollingDirection=Enum.ScrollingDirection.Y,
     })
     corner(TabList, 12)
-    uiStroke(TabList, C.PanelBorder, 1, 0)
+    uiStroke(TabList, Color3.fromRGB(255,255,255), 1, 0)
     ll(TabList, 8)
     pad(TabList, 12,12,16,16)
 
@@ -266,8 +266,8 @@ function Xanix:CreateWindow(cfg)
     local Search = mk("TextBox", {
         Name="Search", Parent=sg,
         BackgroundColor3=C.SearchBg, BorderSizePixel=0,
-        Position=UDim2.new(0.259519041,0, 0.197351784,0),
-        Size=UDim2.new(0.105718084,0, 0.0365699865,0),
+        Position=UDim2.new(0.33,0, 0.174,0),
+        Size=UDim2.new(0.087,0, 0.034,0),
         Font=Enum.Font.GothamMedium, Text="",
         PlaceholderText="Search...",
         TextColor3=C.Text, PlaceholderColor3=C.TextMuted,
@@ -275,7 +275,7 @@ function Xanix:CreateWindow(cfg)
         ClearTextOnFocus=false, MultiLine=false,
     })
     corner(Search, 1000)
-    uiStroke(Search, C.PanelBorder, 1, 0)
+    uiStroke(Search, Color3.fromRGB(255,255,255), 1, 0)
     pad(Search, 10,10,0,0)
 
     local searchIcon = mk("ImageLabel", {
@@ -300,7 +300,7 @@ function Xanix:CreateWindow(cfg)
         AutoButtonColor=false,
     })
     corner(MobileButton, 100000)
-    uiStroke(MobileButton, C.PanelBorder, 1, 0)
+    uiStroke(MobileButton, Color3.fromRGB(255,255,255), 1, 0)
 
     -- ─── STATE ────────────────────────────────────────────────────────────────
     local tabs      = {}
@@ -404,7 +404,7 @@ function Xanix:CreateWindow(cfg)
         local btn = mk("TextButton", {
             Name=name, Parent=TabList,
             BackgroundColor3=C.TabBtn, BorderSizePixel=0,
-            Size=UDim2.new(1,0, 0,34),
+            Size=UDim2.new(1,0, 0,28),
             AutoButtonColor=false,
             Font=Enum.Font.GothamMedium, Text=name,
             TextColor3=C.TextDim, TextSize=14,
@@ -462,7 +462,7 @@ function Xanix:CreateWindow(cfg)
 
         -- ── ROW ──────────────────────────────────────────────────────────────
         local FS    = 13
-        local ROW_H = 38
+        local ROW_H = 34
 
         local function makeRow(h)
             local f = mk("Frame", {
@@ -627,7 +627,7 @@ function Xanix:CreateWindow(cfg)
             local inc = s.Increment or 1
             local val = math.clamp(s.CurrentValue or mn, mn, mx)
             local suf = s.Suffix and (" " .. s.Suffix) or ""
-            local f   = makeRow(56)
+            local f   = makeRow(50)
 
             mk("TextLabel",{
                 Size=UDim2.new(0.58,0,0,20), Position=UDim2.fromOffset(12,6),
@@ -719,7 +719,7 @@ function Xanix:CreateWindow(cfg)
 
         -- INPUT ───────────────────────────────────────────────────────────────
         function Tab:CreateInput(s)
-            local f = makeRow(54)
+            local f = makeRow(48)
             mk("TextLabel",{
                 Size=UDim2.new(1,0,0,15), Position=UDim2.fromOffset(12,5),
                 BackgroundTransparency=1, Text=s.Name or "Input",
